@@ -27,3 +27,4 @@ $string['comments:myaddinstance'] = 'Add a new Like block to Dashboard';
 $string['comments:addinstance'] = 'Add a new like block';
 $string['pluginname'] = 'Likes';
 $string['privacy:metadata:core_comment'] = 'A record of likes added on this page';
+$string['hellomessage'] = "Hello blocks. This is Ajit here";

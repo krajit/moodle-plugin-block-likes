@@ -21,6 +21,9 @@
  * @copyright 2009 Dongsheng Cai <dongsheng@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+ use block_likes\output;
+
 class block_likes extends block_base {
 
     function init() {
@@ -45,6 +48,10 @@ class block_likes extends block_base {
 
     function get_content() {
         global $CFG;
+        $output = $this->page->get_renderer('block_likes');
+        $html = $output->render_hello_message();
+
+
 
         if ($this->content !== NULL) {
             return $this->content;
@@ -82,7 +89,8 @@ class block_likes extends block_base {
 
         $this->content = new stdClass();
 //        $this->content->text = $comment->output(true);
-        $this->content->text ='<div style="color:green !important;font-weight:bold;padding:1em;">Hello blocks!</div>';
+//        $this->content->text ='<div style="color:green !important;font-weight:bold;padding:1em;">Hello blocks!</div>';
+        $this->content->text = $html;
         $this->content->footer = '';
         return $this->content;
     }
