@@ -10,7 +10,14 @@ class renderer extends plugin_renderer_base {
     public function render_hello_message(): string {
         global $DB, $USER, $COURSE, $PAGE;
 
-        $pageurl = $PAGE->url->out();
+        //$pageurl = $PAGE->url->out();
+
+        $pageurl = $PAGE->url->get_path(true);  // true = leading slash
+        if ($PAGE->url->get_query_string()) {
+            $pageurl .= '?' . $PAGE->url->get_query_string();
+        }
+
+
         // Count votes for this page
         $likes = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'like']);
         $dislikes = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'dislike']);

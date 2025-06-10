@@ -35,5 +35,6 @@ if (!$existing) {
 }
 
 // FIX: Ensure $pageurl is a valid moodle_url
-$redirecturl = new moodle_url($pageurl);
+//$redirecturl = new moodle_url($pageurl);
+$redirecturl = new moodle_url($CFG->wwwroot . $pageurl);
 redirect($redirecturl);
