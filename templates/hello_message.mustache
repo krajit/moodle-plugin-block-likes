@@ -25,17 +25,18 @@
     </tr>
 </table>
 
-<div class="box py-3 card-columns">
+<hr>
+<strong> Liked pages by you </strong>
+<div>
 {{#userlikes}}
-    <div class="card">
-        <div class="card-body">
-            <p class="card-text">{{pageurl}}</p>
-            <p class="card-text">
-                <small class="text-muted">
-                    {{#userdate}} {{timecreated}}, {{#str}} strftimedaydatetime, core_langconfig {{/str}} {{/userdate}}
-                </small>
-            </p>
-        </div>
-    </div>
+    <p><a href={{fullurl}} target="_blank">{{pageurl}}</a></p>
 {{/userlikes}}
+</div>
+
+<hr>
+<strong> Dislike pages by you </strong>
+<div>
+{{#userdislikes}}
+    <p><a href={{fullurl}} target="_blank">{{pageurl}}</a></p>
+{{/userdislikes}}
 </div>

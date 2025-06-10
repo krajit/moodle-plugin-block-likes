@@ -8,7 +8,7 @@ use plugin_renderer_base;
 
 class renderer extends plugin_renderer_base {
     public function render_hello_message(): string {
-        global $DB, $USER, $COURSE, $PAGE;
+        global $DB, $USER, $COURSE, $PAGE, $CGF;
 
         //$pageurl = $PAGE->url->out();
 
@@ -23,6 +23,18 @@ class renderer extends plugin_renderer_base {
         $dislikecount = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'dislike']);
 
         $userlikes = $DB->get_records('block_likes_votes', ['vote' => 'like', 'userid'=>$USER->id]);
+        foreach ($userlikes as $key => $record) {
+            $record->fullurl = $CFG->wwwroot . ($record->pageurl); 
+            $userlikes[$key] = $record;
+        }
+
+        $userdislikes = $DB->get_records('block_likes_votes', ['vote' => 'dislike', 'userid'=>$USER->id]);
+        foreach ($userdislikes as $key => $record) {
+            $record->fullurl = $CFG->wwwroot . ($record->pageurl); 
+            $userdislikes[$key] = $record;
+        }
+
+
 
         $data = [
             'likeurl' => new \moodle_url('/blocks/likes/like.php'),
@@ -33,6 +45,8 @@ class renderer extends plugin_renderer_base {
              'likecount' => $likecount,
             'dislikecount' => $dislikecount,
             'userlikes' => array_values($userlikes),
+            'userdislikes' => array_values($userdislikes),
+
         ];
         return $this->render_from_template('block_likes/hello_message', $data);
     }
