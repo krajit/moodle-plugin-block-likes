@@ -1,14 +1,24 @@
 <table class="table table-bordered text-center w-auto mx-auto">
     <tr>
       <td>
-        <button type="button" class="btn btn-success">
-          👍
-        </button>
+        <form method="post" action="{{likeurl}}" class="d-inline">
+          <input type="hidden" name="vote" value="like">
+          <input type="hidden" name="userid" value="{{userid}}">
+          <input type="hidden" name="courseid" value="{{courseid}}">
+          <input type="hidden" name="pageurl" value="{{pageurl}}">
+          <input type="hidden" name="sesskey" value="{{sesskey}}">
+          <button type="submit" class="btn btn-success">👍</button>
+        </form>
       </td>
       <td>
-        <button type="button" class="btn btn-danger">
-          👎
-        </button>
+        <form method="post" action="{{likeurl}}" class="d-inline">
+          <input type="hidden" name="vote" value="dislike">
+          <input type="hidden" name="userid" value="{{userid}}">
+          <input type="hidden" name="courseid" value="{{courseid}}">
+          <input type="hidden" name="pageurl" value="{{pageurl}}">
+          <input type="hidden" name="sesskey" value="{{sesskey}}">
+          <button type="submit" class="btn btn-danger">👎</button>
+        </form>
       </td>
     </tr>
   </table>
