@@ -19,8 +19,10 @@ class renderer extends plugin_renderer_base {
 
 
         // Count votes for this page
-        $likes = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'like']);
-        $dislikes = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'dislike']);
+        $likecount = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'like']);
+        $dislikecount = $DB->count_records('block_likes_votes', ['pageurl' => $pageurl, 'vote' => 'dislike']);
+
+        $userlikes = $DB->get_records('block_likes_votes', ['vote' => 'like', 'userid'=>$USER->id]);
 
         $data = [
             'likeurl' => new \moodle_url('/blocks/likes/like.php'),
@@ -28,8 +30,9 @@ class renderer extends plugin_renderer_base {
             'courseid' => $COURSE->id ?? 1,
             'pageurl' => $pageurl,
             'sesskey' => sesskey(),
-             'likecount' => $likes,
-            'dislikecount' => $dislikes
+             'likecount' => $likecount,
+            'dislikecount' => $dislikecount,
+            'userlikes' => array_values($userlikes),
         ];
         return $this->render_from_template('block_likes/hello_message', $data);
     }
